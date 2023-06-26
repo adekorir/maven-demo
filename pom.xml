@@ -9,6 +9,10 @@
 
     <description>A simple project to test out the maven clean plugin.</description>
 
+    <properties>
+        <tempDir>${java.io.tmpdir}/${project.artifactId}</tempDir>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -25,15 +29,35 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <directory>${tempDir}</directory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <outputDirectory>${tempDir}</outputDirectory>
+                </configuration>
+            </plugin>
         </plugins>
 
         <pluginManagement>
             <plugins>
+                
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.3.1</version>
                 </plugin>
-                
+
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.11.0</version>
@@ -43,7 +67,12 @@
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.3.0</version>
                 </plugin>
-
+                
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
+                
             </plugins>
         </pluginManagement>
     </build>
