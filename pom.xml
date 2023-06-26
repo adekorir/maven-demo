@@ -10,69 +10,41 @@
     <description>A simple project to test out the maven clean plugin.</description>
 
     <properties>
-        <tempDir>${java.io.tmpdir}/${project.artifactId}</tempDir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>20</maven.compiler.release>
     </properties>
 
     <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>20</source>
-                    <target>20</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <configuration>
-                    <directory>${tempDir}</directory>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <outputDirectory>${tempDir}</outputDirectory>
-                </configuration>
-            </plugin>
-        </plugins>
-
+        <!--
+         ! I really doubt that it really makes sense, but if you have to you should go this way!!
+         ! The maven-clean-plugin does not even have a parameter "<directory>..</directory>"
+         ! See https://maven.apache.org/plugins/maven-clean-plugin/clean-mojo.html
+         !
+         ! Change here the base directory if really really needed!
+         -->
+        <directory>${project.basedir}/.brad/${project.artifactId}</directory>
         <pluginManagement>
             <plugins>
-                
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.3.1</version>
+                    <version>3.2.0</version>
                 </plugin>
-
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.3.1</version>
                 </plugin>
-
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.11.0</version>
                 </plugin>
-
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.3.0</version>
                 </plugin>
-                
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
                     <version>3.1.1</version>
                 </plugin>
-                
             </plugins>
         </pluginManagement>
     </build>
